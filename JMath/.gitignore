@@ -1,0 +1,5 @@
+lib
+bin
+*.a
+build
+jversion.hpp

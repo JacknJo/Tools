@@ -1,0 +1,5 @@
+extern char libjrandom_VERSION_MAJOR_REF;
+extern char libjrandom_VERSION_MINOR_REF;
+extern char libjrandom_VERSION_PATCH_REF;
+extern char libjrandom_VERSION_REVISION_REF;
+extern char libjrandom_BUILD_NUMBER_REF;
