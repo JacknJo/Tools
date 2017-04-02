@@ -69,9 +69,9 @@ namespace Tools
          */
         enum SocketType
         {
-            TcpSocket = SOCK_STREAM,
-            UdpSocket = SOCK_DGRAM,
-            UnknownSocketType = -1
+            e_TcpSocket = SOCK_STREAM,
+            e_UdpSocket = SOCK_DGRAM,
+            e_UnknownSocketType = -1
         };
 
         /**
@@ -242,20 +242,20 @@ namespace Tools
      *   UDP Socket class.
      */
 
-    class UDPSocket : public CSocket
+    class UdpSocket : public CSocket
     {
     public:
         /**
            *   Construct a UDP socket
            *   @exception SocketException thrown if unable to create UDP socket
            */
-        UDPSocket() throw(CSocketException);
+        UdpSocket() throw(CSocketException);
         /**
          *   Construct a UDP socket with the given local port
          *   @param localPort local port
          *   @exception SocketException thrown if unable to create UDP socket
          */
-        UDPSocket(unsigned short localPort) throw(CSocketException);
+        UdpSocket(unsigned short localPort) throw(CSocketException);
 
         /**
          *   Construct a UDP socket with the given local port and address
@@ -263,7 +263,7 @@ namespace Tools
          *   @param localPort local port
          *   @exception SocketException thrown if unable to create UDP socket
          */
-        UDPSocket(const string &localAddress, unsigned short localPort, int timeOutSec, int timeOutUSec) throw(CSocketException);
+        UdpSocket(const string &localAddress, unsigned short localPort, int timeOutSec, int timeOutUSec) throw(CSocketException);
 
         /**
          *   Unset foreign address and port
@@ -324,6 +324,12 @@ namespace Tools
          *   @exception SocketException thrown if unable to leave group
          */
         void LeaveGroup(const string &multicastGroup) throw(CSocketException);
+
+        /**
+         *   TODO!
+         *
+         */
+        static void PrintVersion();
 
     private:
         void SetBroadcast();

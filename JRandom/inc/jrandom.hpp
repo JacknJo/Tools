@@ -8,7 +8,9 @@ namespace Tools
     class JRandom
     {
     public:
-        static int random(int min, int max);
-        static float randomf(float min, float max);
+        static int RandomI(int min, int max);
+        static float RandomF(float min, float max);
+        static double RandomD(double min, double max);
+        static void PrintVersion();
     };
 }

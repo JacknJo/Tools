@@ -3,10 +3,6 @@
 //! C++ includes.
 #include <chrono>
 
-//! Gui includes.
-
-//! Project includes.
-
 namespace Tools
 {
     class JTimer
@@ -29,6 +25,7 @@ namespace Tools
         double GetTime(Time unit = milliseconds);
         void Reset();
         void Stop();
+        static void PrintVersion();
 
     private:
         //! Methods

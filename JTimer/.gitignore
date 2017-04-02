@@ -1,4 +1,6 @@
 lib
 bin
-libjtimer.a
+*.a
 build
+jversion.hpp
+.version

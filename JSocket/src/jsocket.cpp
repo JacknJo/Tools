@@ -1,4 +1,5 @@
 #include "jsocket.hpp"
+#include "jversion.hpp"
 #include <errno.h>
 #include <cstring>
 #include <fcntl.h>
@@ -355,26 +356,26 @@ namespace Tools
         }*/
     }
 
-    UDPSocket::UDPSocket() throw(CSocketException): CSocket(UdpSocket, IPv4Protocol, 0, 5000)
+    UdpSocket::UdpSocket() throw(CSocketException): CSocket(e_UdpSocket, IPv4Protocol, 0, 5000)
     {
         SetBroadcast();
     }
 
-    UDPSocket::UDPSocket(unsigned short localPort) throw(CSocketException):
-        CSocket(UdpSocket, IPv4Protocol, 0, 5000)
+    UdpSocket::UdpSocket(unsigned short localPort) throw(CSocketException):
+        CSocket(e_UdpSocket, IPv4Protocol, 0, 5000)
     {
         BindLocalPort(localPort);
         SetBroadcast();
     }
 
-    UDPSocket::UDPSocket(const string &localAddress, unsigned short localPort, int timeOutSec, int timeOutUSec) throw(CSocketException):
-        CSocket(UdpSocket, IPv4Protocol, timeOutSec, timeOutUSec)
+    UdpSocket::UdpSocket(const string &localAddress, unsigned short localPort, int timeOutSec, int timeOutUSec) throw(CSocketException):
+        CSocket(e_UdpSocket, IPv4Protocol, timeOutSec, timeOutUSec)
     {
         BindLocalAddressAndPort(localAddress, localPort);
         SetBroadcast();
     }
 
-    void UDPSocket::DisconnectFromHost() throw(CSocketException)
+    void UdpSocket::DisconnectFromHost() throw(CSocketException)
     {
         sockaddr_in nullAddr;
         memset(&nullAddr, 0, sizeof(nullAddr));
@@ -390,7 +391,7 @@ namespace Tools
         }
     }
 
-    void UDPSocket::SendDataGram(const void *buffer, int bufferLen, const string &foreignAddress,
+    void UdpSocket::SendDataGram(const void *buffer, int bufferLen, const string &foreignAddress,
                                  unsigned short foreignPort)  throw(CSocketException)
     {
         //cout<<"Befor Fill addr";
@@ -405,7 +406,7 @@ namespace Tools
         }
     }
 
-    int UDPSocket::RecvDataGram(void *buffer, int bufferLen, string &sourceAddress, unsigned short &sourcePort)
+    int UdpSocket::RecvDataGram(void *buffer, int bufferLen, string &sourceAddress, unsigned short &sourcePort)
     throw(CSocketException)
     {
         sockaddr_in clntAddr;
@@ -427,7 +428,7 @@ namespace Tools
         return nBytes;
     }
 
-    void UDPSocket::SetMulticastTTL(unsigned char multicastTTL) throw(CSocketException)
+    void UdpSocket::SetMulticastTTL(unsigned char multicastTTL) throw(CSocketException)
     {
         if (setsockopt(m_sockDesc, IPPROTO_IP, IP_MULTICAST_TTL, (void *) &multicastTTL, sizeof(multicastTTL)) < 0)
         {
@@ -435,7 +436,7 @@ namespace Tools
         }
     }
 
-    void UDPSocket::JoinGroup(const string &multicastGroup) throw(CSocketException)
+    void UdpSocket::JoinGroup(const string &multicastGroup) throw(CSocketException)
     {
         struct ip_mreq multicastRequest;
 
@@ -451,7 +452,7 @@ namespace Tools
 
     }
 
-    void UDPSocket::LeaveGroup(const string &multicastGroup) throw(CSocketException)
+    void UdpSocket::LeaveGroup(const string &multicastGroup) throw(CSocketException)
     {
         struct ip_mreq multicastRequest;
 
@@ -467,12 +468,17 @@ namespace Tools
 
     }
 
-    void UDPSocket::SetBroadcast()
+    void UdpSocket::SetBroadcast()
     {
         // If this fails, we'll hear about it when we try to send.  This will allow
         // system that cannot broadcast to continue if they don't plan to broadcast
         int broadcastPermission = 1;
         setsockopt(m_sockDesc, SOL_SOCKET, SO_BROADCAST,
                    (void *) &broadcastPermission, sizeof(broadcastPermission));
+    }
+
+    void UdpSocket::PrintVersion()
+    {
+        JVersion::JSocket::PrintVersion();
     }
 }

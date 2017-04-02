@@ -1,4 +1,6 @@
 lib
 bin
-libjsocket.a
+*.a
 build
+jversion.hpp
+.version

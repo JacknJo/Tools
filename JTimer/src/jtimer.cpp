@@ -1,4 +1,6 @@
 #include "jtimer.hpp"
+#include "jversion.hpp"
+
 namespace Tools
 {
     JTimer::JTimer(bool startTimer = false)
@@ -52,4 +54,8 @@ namespace Tools
         _start = std::chrono::system_clock::now();
     }
 
+    void JTimer::PrintVersion()
+    {
+        JVersion::JTimer::PrintVersion();
+    }
 }

@@ -1,4 +1,6 @@
 lib
 bin
-libjrandom.a
+*.a
 build
+jversion.hpp
+.version
